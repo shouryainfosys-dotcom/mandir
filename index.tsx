@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-// Fixed: Corrected casing to match App.tsx and resolve compilation conflict
+// Pointing to uppercase App.tsx to resolve casing conflicts with root files and follow standard naming conventions
 import App from './App.tsx';
 
 const rootElement = document.getElementById('root');
