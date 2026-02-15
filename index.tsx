@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-// Fix: Use capitalized App to resolve casing conflict between App.tsx and app.tsx
-// On case-insensitive file systems, these files collide. We prioritize the standard React naming.
-import App from './App';
+// यहाँ 'App' को 'app' (छोटे 'a') से बदल दिया गया है ताकि 
+// यह आपके प्रोजेक्ट की app.tsx फाइल से मैच कर सके।
+import App from './app'; 
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
