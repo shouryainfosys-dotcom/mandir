@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-// Standardize on PascalCase to match the physical file App.tsx and resolve build errors.
-// This matches the file App.tsx on disk.
-import App from './App';
+
+// Import from app.tsx (lowercase) to maintain consistency and avoid casing collision errors
+import App from './app.tsx';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
