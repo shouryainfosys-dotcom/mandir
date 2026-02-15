@@ -1,6 +1,6 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+// Use PascalCase for component imports to stay consistent with file naming conventions and resolve compiler warnings.
 import App from './App';
 
 // Root element check
