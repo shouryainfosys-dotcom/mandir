@@ -212,10 +212,10 @@ const ContactView = () => (
       <div className="bg-white p-8 rounded-2xl shadow-xl border-t-8 border-[#800000]">
         <h3 className="text-2xl font-bold mb-6">संदेश भेजें</h3>
         <form className="space-y-4" onSubmit={e => e.preventDefault()}>
-          <input type="text" className="w-full px-4 py-2 border rounded-lg" placeholder="आपका नाम" />
-          <input type="email" className="w-full px-4 py-2 border rounded-lg" placeholder="आपका ईमेल" />
-          <textarea className="w-full px-4 py-2 border rounded-lg h-32" placeholder="संदेश..."></textarea>
-          <button className="w-full bg-[#800000] text-white py-3 rounded-lg font-bold">भेजें</button>
+          <input type="text" className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-orange-200" placeholder="आपका नाम" />
+          <input type="email" className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-orange-200" placeholder="आपका ईमेल" />
+          <textarea className="w-full px-4 py-2 border rounded-lg h-32 outline-none focus:ring-2 focus:ring-orange-200" placeholder="संदेश..."></textarea>
+          <button className="w-full bg-[#800000] text-white py-3 rounded-lg font-bold hover:bg-[#600000] transition-colors">भेजें</button>
         </form>
       </div>
       <div className="rounded-2xl overflow-hidden h-80 shadow-lg border-2 border-gray-200">

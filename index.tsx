@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// Use PascalCase for component imports to stay consistent with file naming conventions and resolve compiler warnings.
+// Fixed casing: Change import from './app' to './App' to match the file name 'App.tsx' and resolve casing mismatch errors.
 import App from './App';
 
-// Root element check
 const rootElement = document.getElementById('root');
 if (!rootElement) {
   throw new Error("Could not find root element to mount to");
