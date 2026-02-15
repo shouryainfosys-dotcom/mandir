@@ -1,3 +1,3 @@
-// This file is deprecated to resolve casing conflicts with App.tsx.
-// All application logic has been moved to App.tsx.
-// We remove the 'export {}' to ensure this file is not treated as a module.
+// This file is deprecated and was causing a casing conflict with App.tsx.
+// All application logic is maintained in App.tsx.
+export {};
