@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-// Fix: Change import to use PascalCase 'App' and remove extension to resolve naming conflict errors
+// Fix: Use capitalized App to resolve casing conflict between App.tsx and app.tsx
+// On case-insensitive file systems, these files collide. We prioritize the standard React naming.
 import App from './App';
 
 const rootElement = document.getElementById('root');

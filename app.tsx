@@ -1,3 +1,3 @@
-// Fix: Deprecating this file in favor of App.tsx to resolve casing-related compilation errors.
-// All application logic has been moved to PascalCase App.tsx to follow standard React conventions.
+// This file is cleared to resolve casing conflicts with App.tsx on case-insensitive file systems.
+// The main component and application logic reside in App.tsx.
 export {};
