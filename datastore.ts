@@ -1,4 +1,3 @@
-
 import { createClient } from '@supabase/supabase-js';
 import { AppState } from './types';
 import { INITIAL_DATA } from './constants';
@@ -6,7 +5,6 @@ import { INITIAL_DATA } from './constants';
 const SUPABASE_URL = process.env.SUPABASE_URL || '';
 const SUPABASE_KEY = process.env.SUPABASE_ANON_KEY || '';
 
-// Create client only if keys are present, else use a dummy or handle gracefully
 const supabase = SUPABASE_URL && SUPABASE_KEY ? createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
 export const getData = async (): Promise<AppState> => {

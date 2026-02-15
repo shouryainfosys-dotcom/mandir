@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// Fixed casing: Change import from './app' to './App' to match the file name 'App.tsx' and resolve casing mismatch errors.
-import App from './App';
+import './index.css';
+import App from './app';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {

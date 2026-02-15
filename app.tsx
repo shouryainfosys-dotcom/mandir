@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Layout, Menu, Home, Image as ImageIcon, Calendar, Heart, Phone, Lock, LogOut, Plus, Trash2, Edit, Save, X, Upload, Info, Sparkles, Settings, Eye } from 'lucide-react';
-import { AppState, AartiTiming, TempleEvent, GalleryImage } from './types';
+import { Menu, Calendar, Heart, Lock, LogOut, Upload, Eye, Home, Image as ImageIcon } from 'lucide-react';
+import { AppState } from './types';
 import { getData, saveData, checkAdminAuth } from './datastore';
 import { getDivineThought } from './gemini';
 import { INITIAL_DATA } from './constants';
@@ -272,8 +272,7 @@ const AdminPanel = ({ data, onUpdateData, onLogout }: { data: AppState, onUpdate
               <div className="space-y-6">
                 <div className="bg-orange-50 p-4 rounded-xl border border-orange-200">
                   <h4 className="font-bold mb-2 flex items-center gap-2"><Eye size={18} /> वर्तमान 'आज का दर्शन'</h4>
-                  <img src={data.homepage.todaysDarshanImage} className="w-32 h-20 object-cover rounded-lg border" />
-                  <p className="text-xs text-gray-500 mt-2">बदलने के लिए 'गैलरी' टैब में जाएँ।</p>
+                  <img src={data.homepage.todaysDarshanImage} className="w-32 h-20 object-cover rounded-lg border" alt="Current Darshan" />
                 </div>
                 <div className="flex justify-between items-center">
                   <label className="block text-sm font-bold">आज का विचार</label>
@@ -292,7 +291,7 @@ const AdminPanel = ({ data, onUpdateData, onLogout }: { data: AppState, onUpdate
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {data.gallery.map(img => (
                     <div key={img.id} className="relative group border-2 rounded-xl overflow-hidden shadow-md">
-                      <img src={img.url} className="w-full h-32 object-cover" />
+                      <img src={img.url} className="w-full h-32 object-cover" alt="Gallery Item" />
                       <div className="p-2 space-y-2">
                         <button onClick={() => updateField('homepage', 'todaysDarshanImage', img.url)} className={`w-full text-[10px] py-1 rounded font-bold transition-colors ${data.homepage.todaysDarshanImage === img.url ? 'bg-green-600 text-white' : 'bg-orange-100 hover:bg-[#FF9933]'}`}>आज का दर्शन</button>
                         <button onClick={() => onUpdateData({ ...data, gallery: data.gallery.filter(i => i.id !== img.id) })} className="w-full text-[10px] py-1 bg-red-50 text-red-600 rounded hover:bg-red-600 hover:text-white">हटाएँ</button>
