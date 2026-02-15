@@ -2,8 +2,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-// Fix: Use lowercase 'app' to match the canonical filename and avoid filesystem casing conflicts
-import App from './app';
+// Fix: Use PascalCase 'App' to match the root file name and resolve casing conflicts in the build environment
+import App from './App';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
