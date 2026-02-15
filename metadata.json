@@ -1,0 +1,7 @@
+{
+  "name": "ॐ श्री गुरुदत्त विठ्ठल मन्दिर",
+  "description": "A divine, secure, and mobile-friendly application for the Shree Gurudatt Vitthal Mandir, featuring a gallery, events, donation details, and a comprehensive admin panel.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
