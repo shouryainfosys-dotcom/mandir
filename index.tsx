@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+// Fix: Use lowercase 'app' to match the canonical filename and avoid filesystem casing conflicts
 import App from './app';
 
 const rootElement = document.getElementById('root');

@@ -55,8 +55,12 @@ const Navbar = ({ onNavigate, currentPage, mainHeading }: { onNavigate: (page: s
 
 const Footer = ({ data }: { data: AppState }) => (
   <footer className="bg-[#4a0000] text-white py-12 mt-20 border-t-4 border-[#FFD700] relative overflow-hidden min-h-[300px] flex flex-col justify-center">
-    <img src={data.homepage.footerLeftImage} className="hidden xl:block absolute left-0 bottom-0 w-64 h-64 object-contain opacity-20 pointer-events-none" alt="" />
-    <img src={data.homepage.footerRightImage} className="hidden xl:block absolute right-0 bottom-0 w-64 h-64 object-contain opacity-20 pointer-events-none" alt="" />
+    {data.homepage.footerLeftImage && (
+      <img src={data.homepage.footerLeftImage} className="hidden xl:block absolute left-4 bottom-4 w-48 h-48 object-contain opacity-30 pointer-events-none" alt="" />
+    )}
+    {data.homepage.footerRightImage && (
+      <img src={data.homepage.footerRightImage} className="hidden xl:block absolute right-4 bottom-4 w-48 h-48 object-contain opacity-30 pointer-events-none" alt="" />
+    )}
 
     <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left relative z-10">
       <div>
@@ -85,8 +89,8 @@ const Footer = ({ data }: { data: AppState }) => (
 
 const HomeView = ({ data }: { data: AppState }) => (
   <div className="animate-fadeIn">
-    <section className="relative h-[65vh] overflow-hidden">
-      <img src={data.homepage.heroImage} alt="Temple" className="w-full h-full object-cover brightness-50" />
+    <section className="relative h-[70vh] overflow-hidden">
+      <img src={data.homepage.heroImage} alt="Temple" className="w-full h-full object-cover brightness-[0.4]" />
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
         <h2 className="devotional-font text-5xl md:text-8xl text-[#FFD700] drop-shadow-2xl mb-6">{data.homepage.heroTitle}</h2>
         <div className="max-w-3xl bg-black/40 backdrop-blur-md p-8 rounded-3xl border border-white/20 shadow-2xl">
@@ -266,7 +270,12 @@ const ContactView = () => (
 const AdminPanel = ({ data, onUpdateData, onLogout }: { data: AppState, onUpdateData: (newData: AppState) => void, onLogout: () => void }) => {
   const [activeTab, setActiveTab] = useState('homepage');
   const [isFetchingThought, setIsFetchingThought] = useState(false);
+  
+  // Refs for file inputs
   const galleryFileRef = useRef<HTMLInputElement>(null);
+  const heroFileRef = useRef<HTMLInputElement>(null);
+  const footerLeftFileRef = useRef<HTMLInputElement>(null);
+  const footerRightFileRef = useRef<HTMLInputElement>(null);
 
   const updateHomepage = (field: string, value: any) => {
     onUpdateData({ ...data, homepage: { ...data.homepage, [field]: value } });
@@ -337,6 +346,25 @@ const AdminPanel = ({ data, onUpdateData, onLogout }: { data: AppState, onUpdate
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-gray-500">हीरो शीर्षक</label>
                     <input className="w-full p-4 bg-gray-50 rounded-xl outline-none border focus:border-orange-400" value={data.homepage.heroTitle} onChange={e => updateHomepage('heroTitle', e.target.value)} />
+                  </div>
+                  <div className="md:col-span-2 space-y-2">
+                    <label className="text-sm font-bold text-gray-500">हीरो बैकग्राउंड इमेज (Hero Image)</label>
+                    <div className="flex flex-col gap-4">
+                      <div className="flex gap-4 items-center">
+                        <input className="flex-1 p-4 bg-gray-50 rounded-xl outline-none border focus:border-orange-400" placeholder="Image URL" value={data.homepage.heroImage} onChange={e => updateHomepage('heroImage', e.target.value)} />
+                        <button onClick={() => heroFileRef.current?.click()} className="bg-[#800000] text-white p-4 rounded-xl flex items-center gap-2 hover:bg-[#600000] transition-colors shadow-lg">
+                          <Upload size={20} /> अपलोड
+                        </button>
+                        <input type="file" ref={heroFileRef} className="hidden" accept="image/*" onChange={e => handleImageUpload(e, base64 => updateHomepage('heroImage', base64))} />
+                      </div>
+                      <div className="w-full h-48 bg-gray-100 rounded-2xl overflow-hidden border-2 border-dashed border-gray-300 flex items-center justify-center">
+                        {data.homepage.heroImage ? (
+                          <img src={data.homepage.heroImage} className="w-full h-full object-cover" alt="Hero Preview" />
+                        ) : (
+                          <span className="text-gray-400 italic">No image selected</span>
+                        )}
+                      </div>
+                    </div>
                   </div>
                   <div className="md:col-span-2 space-y-2">
                     <label className="text-sm font-bold text-gray-500">स्क्रॉलिंग संदेश</label>
@@ -480,6 +508,45 @@ const AdminPanel = ({ data, onUpdateData, onLogout }: { data: AppState, onUpdate
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-gray-500">संध्याकाल दर्शन समय</label>
                     <input className="w-full p-4 bg-gray-50 rounded-xl outline-none border" value={data.homepage.footerEveningTime} onChange={e => updateHomepage('footerEveningTime', e.target.value)} />
+                  </div>
+                  
+                  {/* Footer Left Image Upload */}
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-gray-500">फुटर बायीं इमेज (Left Image)</label>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex gap-2">
+                        <input className="flex-1 p-3 bg-gray-50 rounded-xl outline-none border text-xs" placeholder="URL" value={data.homepage.footerLeftImage} onChange={e => updateHomepage('footerLeftImage', e.target.value)} />
+                        <button onClick={() => footerLeftFileRef.current?.click()} className="bg-[#800000] text-white p-3 rounded-xl hover:bg-[#600000] transition-colors shadow-md">
+                          <Upload size={16} />
+                        </button>
+                        <input type="file" ref={footerLeftFileRef} className="hidden" accept="image/*" onChange={e => handleImageUpload(e, base64 => updateHomepage('footerLeftImage', base64))} />
+                      </div>
+                      <div className="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden border self-center">
+                        {data.homepage.footerLeftImage && <img src={data.homepage.footerLeftImage} className="w-full h-full object-contain" alt="Left Footer" />}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Footer Right Image Upload */}
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-gray-500">फुटर दायीं इमेज (Right Image)</label>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex gap-2">
+                        <input className="flex-1 p-3 bg-gray-50 rounded-xl outline-none border text-xs" placeholder="URL" value={data.homepage.footerRightImage} onChange={e => updateHomepage('footerRightImage', e.target.value)} />
+                        <button onClick={() => footerRightFileRef.current?.click()} className="bg-[#800000] text-white p-3 rounded-xl hover:bg-[#600000] transition-colors shadow-md">
+                          <Upload size={16} />
+                        </button>
+                        <input type="file" ref={footerRightFileRef} className="hidden" accept="image/*" onChange={e => handleImageUpload(e, base64 => updateHomepage('footerRightImage', base64))} />
+                      </div>
+                      <div className="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden border self-center">
+                        {data.homepage.footerRightImage && <img src={data.homepage.footerRightImage} className="w-full h-full object-contain" alt="Right Footer" />}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="md:col-span-2 space-y-2">
+                    <label className="text-sm font-bold text-gray-500">फुटर संक्षिप्त विवरण (Footer Description)</label>
+                    <textarea className="w-full p-4 bg-gray-50 rounded-xl outline-none border h-24" value={data.homepage.footerDescription} onChange={e => updateHomepage('footerDescription', e.target.value)} />
                   </div>
                 </div>
               </div>
