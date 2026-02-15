@@ -1,3 +1,3 @@
-// This file is deprecated to resolve naming conflicts with App.tsx.
-// All application logic has been moved back to uppercase App.tsx to follow standard React naming conventions and resolve casing collision errors.
+// Fix: Deprecating this file in favor of App.tsx to resolve casing-related compilation errors.
+// All application logic has been moved to PascalCase App.tsx to follow standard React conventions.
 export {};
