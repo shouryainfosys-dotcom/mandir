@@ -1,10 +1,8 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 
-// Using PascalCase 'App' to follow React conventions and resolve casing conflicts
-import App from './App';
+// Import using the full file path for browser module compatibility
+import App from './App.tsx';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {

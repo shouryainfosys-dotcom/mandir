@@ -1,5 +1,4 @@
-
-import { AppState } from './types';
+import { AppState } from './types.ts';
 
 export const INITIAL_DATA: AppState = {
   homepage: {

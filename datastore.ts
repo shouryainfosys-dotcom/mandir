@@ -1,10 +1,11 @@
-
 import { createClient } from '@supabase/supabase-js';
-import { AppState } from './types';
-import { INITIAL_DATA } from './constants';
+import { AppState } from './types.ts';
+import { INITIAL_DATA } from './constants.ts';
 
-const SUPABASE_URL = (import.meta as any).env.VITE_SUPABASE_URL || '';
-const SUPABASE_KEY = (import.meta as any).env.VITE_SUPABASE_ANON_KEY || '';
+// Safe access to environment variables
+const env = (import.meta as any).env || {};
+const SUPABASE_URL = env.VITE_SUPABASE_URL || '';
+const SUPABASE_KEY = env.VITE_SUPABASE_ANON_KEY || '';
 const STORAGE_KEY = 'temple_app_data_v1';
 
 const supabase = SUPABASE_URL && SUPABASE_KEY ? createClient(SUPABASE_URL, SUPABASE_KEY) : null;
@@ -59,6 +60,10 @@ export const saveData = async (data: AppState) => {
   }
 };
 
+/**
+ * Validates admin login credentials.
+ * Updated to 'raam' and 'shyam' per user request.
+ */
 export const checkAdminAuth = (user: string, pass: string): boolean => {
-  return user === 'admin' && pass === 'vitthal123';
+  return user === 'raam' && pass === 'shyam';
 };
