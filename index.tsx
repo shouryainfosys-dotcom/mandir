@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-// Standardized import to resolve case-sensitivity conflicts on hosting platforms
+// 'App' (Capital A) is the standard entry point
 import App from './App';
 
 const rootElement = document.getElementById('root');
