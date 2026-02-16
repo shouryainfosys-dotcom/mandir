@@ -1,8 +1,9 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-// Fixed casing conflict: importing from App.tsx instead of app.tsx
+// Using PascalCase 'App' to follow React conventions and resolve casing conflicts
 import App from './App';
 
 const rootElement = document.getElementById('root');

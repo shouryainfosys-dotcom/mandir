@@ -1,3 +1,4 @@
-// This file is intentionally cleared to resolve casing conflicts with App.tsx.
-// Application logic has been moved to uppercase App.tsx to follow React component naming conventions.
+
+// This file is cleared to resolve casing conflicts between 'App.tsx' and 'app.tsx'.
+// Standard React PascalCase 'App.tsx' is now used for the main application logic.
 export {};
