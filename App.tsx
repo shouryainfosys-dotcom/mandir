@@ -7,11 +7,11 @@ import { INITIAL_DATA } from './constants.ts';
 
 // --- Global Components ---
 
-const ScrollingBanner = ({ message, bgColor = "bg-[#FF9933]", textColor = "text-white" }: { message: string, bgColor?: string, textColor?: string }) => (
-  <div className={`${bgColor} ${textColor} py-1 overflow-hidden border-y border-[#FFD700]/20 shadow-sm z-40 relative`}>
-    <div className="animate-marquee whitespace-nowrap text-[9px] md:text-xs font-bold flex items-center">
+const ScrollingBanner = ({ message, bgColor = "bg-[#FF9933]", textColor = "text-white", isBold = false }: { message: string, bgColor?: string, textColor?: string, isBold?: boolean }) => (
+  <div className={`${bgColor} ${textColor} py-1.5 overflow-hidden border-y border-white/10 shadow-sm z-40 relative`}>
+    <div className={`animate-marquee whitespace-nowrap text-[10px] md:text-xs flex items-center ${isBold ? 'font-bold' : 'font-medium'}`}>
       {[1, 2, 3, 4, 5].map((i) => (
-        <span key={i} className="mx-6 md:mx-8 font-serif italic drop-shadow-sm flex items-center gap-1.5">
+        <span key={i} className="mx-6 md:mx-8 font-serif italic drop-shadow-sm flex items-center gap-2">
           <Sparkles size={10} className="text-[#FFD700]"/> ॐ {message} ॐ
         </span>
       ))}
@@ -62,50 +62,51 @@ const Navbar = ({ onNavigate, currentPage, mainHeading }: { onNavigate: (page: s
 );
 
 const Footer = ({ data }: { data: AppState }) => (
-  <footer className="bg-[#3a0000] text-white py-6 mt-6 border-t-2 border-[#FFD700] relative overflow-hidden">
+  <footer className="bg-[#3a0000] text-white py-4 mt-6 border-t-2 border-[#FFD700] relative overflow-hidden">
     <div className="absolute inset-0 opacity-5 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/mandala.png')]"></div>
     
-    <div className="absolute left-2 bottom-4 z-0 hidden lg:block pointer-events-none transform opacity-30">
-      <img src={data?.homepage?.footerLeftImage} alt="" className="w-24 h-24 object-contain" />
+    {/* Side images with improved visibility on mobile */}
+    <div className="absolute left-1 bottom-1 z-0 pointer-events-none opacity-40">
+      <img src={data?.homepage?.footerLeftImage} alt="" className="w-16 h-16 md:w-24 md:h-24 object-contain" />
     </div>
-    <div className="absolute right-2 bottom-4 z-0 hidden lg:block pointer-events-none transform opacity-30">
-      <img src={data?.homepage?.footerRightImage} alt="" className="w-24 h-24 object-contain" />
+    <div className="absolute right-1 bottom-1 z-0 pointer-events-none opacity-40">
+      <img src={data?.homepage?.footerRightImage} alt="" className="w-16 h-16 md:w-24 md:h-24 object-contain" />
     </div>
 
     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10">
-      <div className="space-y-1">
-        <h3 className="devotional-font text-lg text-[#FFD700]">{data?.homepage?.footerTitle}</h3>
-        <p className="text-gray-300 text-[8px] italic leading-relaxed font-serif border-l-2 border-[#FFD700]/30 pl-2 opacity-80">{data?.homepage?.footerDescription}</p>
+      <div className="space-y-0.5">
+        <h3 className="devotional-font text-base md:text-lg text-[#FFD700]">{data?.homepage?.footerTitle}</h3>
+        <p className="text-gray-300 text-[7px] md:text-[8px] italic leading-relaxed font-serif border-l-2 border-[#FFD700]/30 pl-2 opacity-80">{data?.homepage?.footerDescription}</p>
       </div>
       
-      <div className="bg-black/10 p-3 rounded-lg border border-white/5 shadow-inner">
-        <h4 className="font-bold text-[8px] mb-1.5 text-[#FFD700] flex items-center gap-2 uppercase tracking-wider border-b border-white/5 pb-1">
-          <Settings size={10} className="text-[#FF9933]"/> संपर्क
+      <div className="bg-black/10 p-2 md:p-3 rounded-lg border border-white/5 shadow-inner">
+        <h4 className="font-bold text-[7px] md:text-[8px] mb-1 text-[#FFD700] flex items-center gap-1.5 uppercase tracking-wider border-b border-white/5 pb-0.5">
+          <Settings size={8} className="text-[#FF9933]"/> संपर्क
         </h4>
-        <div className="space-y-1 text-gray-300 text-[8px]">
-          <p className="flex items-center gap-2"><Phone size={8} className="text-[#FF9933] shrink-0"/> {data?.homepage?.footerPhone}</p>
-          <p className="flex items-start gap-2 leading-tight"><MapPin size={8} className="text-[#FF9933] mt-0.5 shrink-0"/> {data?.homepage?.footerAddress}</p>
+        <div className="space-y-0.5 text-gray-300 text-[7px] md:text-[8px]">
+          <p className="flex items-center gap-1.5"><Phone size={8} className="text-[#FF9933] shrink-0"/> {data?.homepage?.footerPhone}</p>
+          <p className="flex items-start gap-1.5 leading-tight"><MapPin size={8} className="text-[#FF9933] mt-0.5 shrink-0"/> {data?.homepage?.footerAddress}</p>
         </div>
       </div>
 
-      <div className="bg-black/10 p-3 rounded-lg border border-white/5 shadow-inner">
-        <h4 className="font-bold text-[8px] mb-1.5 text-[#FFD700] flex items-center gap-2 uppercase tracking-wider border-b border-white/5 pb-1">
-          <Clock size={10} className="text-[#FF9933]"/> दर्शन समय
+      <div className="bg-black/10 p-2 md:p-3 rounded-lg border border-white/5 shadow-inner">
+        <h4 className="font-bold text-[7px] md:text-[8px] mb-1 text-[#FFD700] flex items-center gap-1.5 uppercase tracking-wider border-b border-white/5 pb-0.5">
+          <Clock size={8} className="text-[#FF9933]"/> दर्शन समय
         </h4>
-        <div className="flex justify-between md:block md:space-y-1">
+        <div className="flex justify-between md:block md:space-y-0.5">
           <div>
-            <p className="text-[6px] uppercase tracking-widest text-[#FF9933] font-black opacity-60">प्रातः</p>
-            <p className="text-xs font-black text-[#FFD700]">{data?.homepage?.footerMorningTime}</p>
+            <p className="text-[5px] md:text-[6px] uppercase tracking-widest text-[#FF9933] font-black opacity-60">प्रातः</p>
+            <p className="text-[10px] md:text-xs font-black text-[#FFD700]">{data?.homepage?.footerMorningTime}</p>
           </div>
           <div>
-            <p className="text-[6px] uppercase tracking-widest text-orange-400 font-black opacity-60">संध्या</p>
-            <p className="text-xs font-black text-[#FFD700]">{data?.homepage?.footerEveningTime}</p>
+            <p className="text-[5px] md:text-[6px] uppercase tracking-widest text-orange-400 font-black opacity-60">संध्या</p>
+            <p className="text-[10px] md:text-xs font-black text-[#FFD700]">{data?.homepage?.footerEveningTime}</p>
           </div>
         </div>
       </div>
     </div>
     
-    <div className="text-center mt-4 border-t border-white/5 pt-2 text-gray-500 text-[7px] italic relative z-10">
+    <div className="text-center mt-3 border-t border-white/5 pt-1 text-gray-500 text-[6px] md:text-[7px] italic relative z-10">
       &copy; 2024 {data?.homepage?.mainHeading}. सर्वाधिकार सुरक्षित।
     </div>
   </footer>
@@ -115,65 +116,73 @@ const Footer = ({ data }: { data: AppState }) => (
 
 const HomeView = ({ data }: { data: AppState }) => (
   <div className="animate-fadeIn">
-    <section className="relative h-[40vh] md:h-[55vh] overflow-hidden flex items-center justify-center">
-      <img src={data.homepage.heroImage} className="absolute inset-0 w-full h-full object-cover brightness-[0.45] scale-100 animate-slowZoom" alt="Hero" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/60"></div>
+    {/* Hero Section - Maximum clarity, removed dark shade filters */}
+    <section className="relative h-[40vh] md:h-[60vh] overflow-hidden flex items-center justify-center">
+      <img 
+        src={data.homepage.heroImage} 
+        className="absolute inset-0 w-full h-full object-cover brightness-100 scale-100 animate-slowZoom" 
+        alt="Hero" 
+      />
+      {/* Very subtle gradient only at the bottom for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+      
       <div className="relative z-10 text-center px-4 max-w-4xl">
-        <h2 className="devotional-font text-xl md:text-3xl lg:text-4xl text-[#FFD700] drop-shadow-2xl animate-fadeIn leading-tight">
+        <h2 className="devotional-font text-2xl md:text-4xl lg:text-5xl text-[#FFD700] drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] animate-fadeIn leading-tight">
           {data.homepage.heroTitle}
         </h2>
       </div>
     </section>
 
-    {/* Welcome Message Scrolling Banner (New Transparent Strip) */}
-    <div className="relative z-30 -mt-4 md:-mt-6">
+    {/* Welcome Message Scrolling Banner - Transparent strip above Suvichar */}
+    <div className="relative z-30 -mt-4">
        <ScrollingBanner 
           message={data.homepage.welcomeMessage} 
-          bgColor="bg-white/10 backdrop-blur-sm" 
-          textColor="text-[#800000]" 
+          bgColor="bg-black/30 backdrop-blur-md" 
+          textColor="text-white" 
+          isBold={true}
        />
     </div>
 
-    <div className="max-w-7xl mx-auto px-4 md:px-6 mt-4 space-y-6 pb-8">
+    <div className="max-w-7xl mx-auto px-4 md:px-6 mt-4 space-y-4 md:space-y-6 pb-6">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Daily Thought - Smaller & More Compact */}
-        <div className="lg:col-span-2 bg-white p-4 md:p-6 rounded-2xl shadow-md border-l-[6px] border-[#FF9933] flex flex-col justify-center relative overflow-hidden h-fit self-center">
+        <div className="lg:col-span-2 bg-white p-3 md:p-5 rounded-xl shadow-sm border-l-[5px] border-[#FF9933] flex flex-col justify-center relative overflow-hidden h-fit self-center">
            <div className="absolute -right-2 -bottom-2 opacity-[0.03] pointer-events-none">
-              <Heart size={80} className="text-[#800000]" />
+              <Heart size={60} className="text-[#800000]" />
            </div>
-          <h3 className="text-[#800000] font-black text-[8px] md:text-[10px] mb-2 flex items-center uppercase tracking-[0.2em] border-b border-gray-50 pb-1">
-            <Heart className="mr-1.5 text-red-600 animate-pulse" fill="currentColor" size={12} /> आज का सुविचार
+          <h3 className="text-[#800000] font-black text-[7px] md:text-[9px] mb-1.5 flex items-center uppercase tracking-[0.2em] border-b border-gray-50 pb-0.5">
+            <Heart className="mr-1 text-red-600 animate-pulse" fill="currentColor" size={10} /> आज का सुविचार
           </h3>
-          <p className="text-sm md:text-base lg:text-lg font-serif font-bold text-gray-800 leading-snug relative z-10">
+          <p className="text-xs md:text-base font-serif font-bold text-gray-800 leading-snug relative z-10">
             "{data.homepage.dailyThought}"
           </p>
         </div>
         
         {/* Darshan Image Optimized height */}
-        <div className="bg-white p-1 rounded-2xl shadow-md border-2 border-[#FFD700] relative overflow-hidden group h-[250px] md:h-[320px]">
+        <div className="bg-white p-1 rounded-xl shadow-sm border-2 border-[#FFD700] relative overflow-hidden group h-[220px] md:h-[280px]">
           <div className="absolute top-2 left-2 z-30 bg-[#800000] text-[#FFD700] px-2 py-0.5 rounded-full text-[7px] font-black shadow-md border border-[#FFD700] uppercase tracking-wider">दिव्य दर्शन</div>
-          <img src={data.homepage.todaysDarshanImage} className="w-full h-full object-cover rounded-xl transition-transform duration-700 group-hover:scale-105" alt="Darshan" />
-          <div className="absolute inset-x-2 bottom-2 z-30 bg-black/60 backdrop-blur-md text-white py-2 rounded-lg text-center border border-white/5">
-            <p className="text-xs md:text-sm font-bold devotional-font text-[#FFD700]">मंगल दर्शन</p>
+          <img src={data.homepage.todaysDarshanImage} className="w-full h-full object-cover rounded-lg transition-transform duration-700 group-hover:scale-105" alt="Darshan" />
+          <div className="absolute inset-x-2 bottom-2 z-30 bg-black/60 backdrop-blur-md text-white py-1.5 rounded-lg text-center border border-white/5">
+            <p className="text-[10px] md:text-sm font-bold devotional-font text-[#FFD700]">मंगल दर्शन</p>
           </div>
         </div>
       </div>
 
       {/* Featured Gallery Reduced Size Strip */}
       {data.gallery.length > 0 && (
-        <section className="bg-white/40 backdrop-blur-sm p-4 rounded-2xl shadow-sm border border-[#FFD700]/10">
-          <div className="flex items-center justify-between mb-3 border-b border-gray-100 pb-1.5">
-            <h3 className="devotional-font text-base md:text-lg text-[#800000] flex items-center gap-1.5">
-              <ImageIcon size={18} className="text-[#FF9933]" /> दिव्य झलकियाँ
+        <section className="bg-white/40 backdrop-blur-sm p-3 rounded-xl shadow-sm border border-[#FFD700]/10">
+          <div className="flex items-center justify-between mb-2 border-b border-gray-100 pb-1">
+            <h3 className="devotional-font text-sm md:text-base text-[#800000] flex items-center gap-1.5">
+              <ImageIcon size={16} className="text-[#FF9933]" /> दिव्य झलकियाँ
             </h3>
             <span className="text-[7px] font-black uppercase tracking-widest text-gray-400">गैलरी</span>
           </div>
-          <div className="flex gap-3 overflow-x-auto pb-2 hide-scrollbar">
-            {data.gallery.slice(0, 6).map((img, idx) => (
-              <div key={img.id} className="min-w-[120px] md:min-w-[180px] h-28 md:h-40 relative rounded-xl overflow-hidden shadow-sm group transform transition-transform hover:-translate-y-0.5">
+          <div className="flex gap-2.5 overflow-x-auto pb-1.5 hide-scrollbar">
+            {data.gallery.slice(0, 6).map((img) => (
+              <div key={img.id} className="min-w-[100px] md:min-w-[150px] h-24 md:h-32 relative rounded-lg overflow-hidden shadow-sm group transform transition-transform hover:-translate-y-0.5">
                 <img src={img.url} className="w-full h-full object-cover" alt={img.caption} />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#800000]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
-                  <p className="text-white text-[7px] font-bold">{img.caption}</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#800000]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-1.5">
+                  <p className="text-white text-[6px] font-bold">{img.caption}</p>
                 </div>
               </div>
             ))}
@@ -182,20 +191,20 @@ const HomeView = ({ data }: { data: AppState }) => (
       )}
 
       {/* Aarti Timings - Thinner Strip */}
-      <div className="bg-[#800000] p-4 md:p-6 rounded-[2rem] shadow-lg text-white border-b-4 border-[#FFD700] relative overflow-hidden">
-        <div className="absolute -right-8 -top-8 opacity-[0.05] pointer-events-none">
-           <Sparkles size={120} className="text-[#FFD700]" />
+      <div className="bg-[#800000] p-3 md:p-5 rounded-2xl shadow-md text-white border-b-4 border-[#FFD700] relative overflow-hidden">
+        <div className="absolute -right-6 -top-6 opacity-[0.05] pointer-events-none">
+           <Sparkles size={100} className="text-[#FFD700]" />
         </div>
-        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-4">
+        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-3">
           <div className="text-center lg:text-left">
-            <h3 className="font-black text-lg md:text-2xl devotional-font text-[#FFD700] tracking-wide">आरती समय</h3>
-            <p className="text-orange-200 text-[8px] md:text-[10px] italic font-serif opacity-60">भक्ति का पावन समय</p>
+            <h3 className="font-black text-base md:text-xl devotional-font text-[#FFD700] tracking-wide">आरती समय</h3>
+            <p className="text-orange-200 text-[7px] md:text-[9px] italic font-serif opacity-60">भक्ति का पावन समय</p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 md:gap-3 w-full lg:w-auto">
             {data.aartiTimings.map(t => (
-              <div key={t.id} className="bg-white/10 p-2 md:p-3 rounded-xl border border-white/5 flex flex-col items-center backdrop-blur-sm hover:bg-white/20 transition-all">
-                <span className="text-[6px] md:text-[8px] font-black opacity-60 uppercase tracking-widest mb-0.5 text-[#FFD700]">{t.name}</span>
-                <span className="text-xs md:text-base font-black">{t.time}</span>
+              <div key={t.id} className="bg-white/10 p-1.5 md:p-2.5 rounded-lg border border-white/5 flex flex-col items-center backdrop-blur-sm hover:bg-white/20 transition-all">
+                <span className="text-[5px] md:text-[7px] font-black opacity-60 uppercase tracking-widest mb-0.5 text-[#FFD700]">{t.name}</span>
+                <span className="text-[10px] md:text-sm font-black">{t.time}</span>
               </div>
             ))}
           </div>
